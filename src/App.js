@@ -1,21 +1,17 @@
-function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
-  );
-}
+import Profile from "./Profile";
+import './App.css';
 
 export default function Gallery() {
   return (  
-    <section style={{padding:'10px'}} >
+    <section className="allery">
       <h1>Gallery</h1>
-      <div style={{display:'flex', flexWrap:'wrap', gap:'10px'}}>
-        <Profile/>
-        <Profile/> 
-        <Profile/>
-      </div>
+   
+      <Profile/>
+      <Profile/> 
+      <Profile/>
+      <Profile/>
+  
+      
       
     </section>
   );
