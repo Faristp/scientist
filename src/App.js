@@ -1,33 +1,21 @@
-import { getImageUrl } from "./utils.js";
-import "./App.css";
-export default function Profile() {
+function Item({ name, isPacked }) {
   return (
-    <>
-      <Card>
-        <Avatar
-          size={100}
-          person={{
-            name: "Katsuko Saruhashi",
-            imageId: "YfeOqp2",
-          }}
-        />
-      </Card>
-    </>
+    <li>
+      {name}
+      {isPacked && " ✔"}
+    </li>
   );
 }
 
-function Avatar({ person, size }) {
+export default function PackingList() {
   return (
-    <img
-      className="avatar"
-      src={getImageUrl(person)}
-      alt={person.name}
-      width={size}
-      height={size}
-    />
+    <section>
+      <h1>My Packing List</h1>
+      <ul>
+        <Item name="Car Key" isPacked={true} />
+        <Item name="Sunglasses" isPacked={false} />
+        <Item name="Food" isPacked={true} />
+      </ul>
+    </section>
   );
-}
-
-function Card({ children }) {
-  return <div className="card">{children}</div>;
 }
