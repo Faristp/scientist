@@ -1,31 +1,29 @@
 import { useState } from "react";
 
-export default function Form() {
-  const [to, setTo] = useState("Alice");
-  const [message, setMessage] = useState("Hello!");
+export default function App() {
+  const [score, setScore] = useState(0);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setTimeout(() => {
-      alert("You said: " + message + " to " + to);
-    }, 1000);
+  function increment() {
+    setScore((score) => score + 1);
+  }
+  function decrement() {
+    setScore((score) => score - 1);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        To:{" "}
-        <select value={to} onChange={(e) => setTo(e.target.value)}>
-          <option value="Alice">Alice</option>
-          <option value="Bob">Bob</option>
-        </select>
-      </label>
-      <textarea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type your message here..."
-      />
-      <button type="submit">Send</button>
-    </form>
+    <>
+      <button onClick={increment}>+1</button>
+      <button
+        onClick={() => {
+          increment();
+          increment();
+          increment();
+        }}
+      >
+        -1
+      </button>
+
+      <h1>{score}</h1>
+    </>
   );
 }
