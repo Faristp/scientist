@@ -1,26 +1,21 @@
-import { people } from "./data.js";
-import getImageUrl from "./utils.js";
-
-export default function List() {
-  const listItems = people.map((person) => (
-    <li key={person.id} style={{ display: "flex", marginBottom: "10px" }}>
-      <img
-        src={getImageUrl(person)}
-        alt={person.name}
-        style={{ borderRadius: "50%", marginRight: "100px" }}
-      />
-      <p style={{ maxWidth: "400px" }}>
-        <b>{person.name}:</b>
-        {" " + person.profession} known for {person.accomplishment}
-        <br />
-      </p>
-    </li>
-  ));
-
+export default function App() {
   return (
-    <article>
-      <h1 style={{ marginLeft: "40px" }}> Scientist</h1>
-      <ul>{listItems}</ul>
-    </article>
+    <Toolbar
+      onPlayMovie={() => alert("Playing Movie")}
+      onUploadImage={() => alert("Uploading")}
+    />
   );
+}
+
+function Toolbar({ onPlayMovie, onUploadImage }) {
+  return (
+    <div>
+      <Button onClick={onPlayMovie} children="Play Movie" />
+      <Button onClick={onUploadImage} children="Upload Image" />
+    </div>
+  );
+}
+
+function Button({ onClick, children }) {
+  return <button onClick={onClick}>{children}</button>;
 }
