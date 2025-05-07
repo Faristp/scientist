@@ -1,38 +1,31 @@
 import { useState } from "react";
-import { sculptureList } from "./data.js";
 
-export default function App() {
-  const [index, setIndex] = useState(0);
-  const [showMore, setShowMore] = useState(false);
-  const hasNext = index < sculptureList.length - 1;
+export default function Form() {
+  const [to, setTo] = useState("Alice");
+  const [message, setMessage] = useState("Hello!");
 
-  function handleNextClick() {
-    if (hasNext) {
-      setIndex(index + 1);
-    } else {
-      setIndex(0);
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
+    setTimeout(() => {
+      alert("You said: " + message + " to " + to);
+    }, 1000);
   }
 
-  function handleMoreClick() {
-    setShowMore(!showMore);
-  }
-
-  let sculpture = sculptureList[index];
   return (
-    <div>
-      <button onClick={handleNextClick}>Next</button>
-      <h1>
-        {sculpture.name} by {sculpture.artist}
-      </h1>
-      <p>
-        {index + 1} of {sculptureList.length}
-      </p>
-      <button onClick={handleMoreClick}>
-        {showMore ? "Hide" : "show More"} Details
-      </button>
-      <p>{showMore && sculpture.description}</p>
-      <img src={sculpture.url} alt={sculpture.alt} />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        To:{" "}
+        <select value={to} onChange={(e) => setTo(e.target.value)}>
+          <option value="Alice">Alice</option>
+          <option value="Bob">Bob</option>
+        </select>
+      </label>
+      <textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Type your message here..."
+      />
+      <button type="submit">Send</button>
+    </form>
   );
 }
