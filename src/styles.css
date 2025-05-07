@@ -1,0 +1,26 @@
+.list-heading {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2.5em;
+  text-align: center;
+  border: 3px solid #000;
+  background-color: cadetblue;
+  margin-left: 500px;
+  margin-right: 500px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.list-container {
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(58, 64, 64);
+  margin-left: 500px;
+  margin-right: 500px;
+  margin-top: 0px;
+  color: thistle;
+}
+.list-container li:hover {
+  color: black;
+}
