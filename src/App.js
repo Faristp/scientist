@@ -20,7 +20,7 @@ export default function App() {
           increment();
         }}
       >
-        -1
+        +3
       </button>
 
       <h1>{score}</h1>
