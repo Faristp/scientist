@@ -1,21 +1,38 @@
-export default function App() {
-  return (
-    <Toolbar
-      onPlayMovie={() => alert("Playing Movie")}
-      onUploadImage={() => alert("Uploading")}
-    />
-  );
-}
+import { useState } from "react";
+import { sculptureList } from "./data.js";
 
-function Toolbar({ onPlayMovie, onUploadImage }) {
+export default function App() {
+  const [index, setIndex] = useState(0);
+  const [showMore, setShowMore] = useState(false);
+  const hasNext = index < sculptureList.length - 1;
+
+  function handleNextClick() {
+    if (hasNext) {
+      setIndex(index + 1);
+    } else {
+      setIndex(0);
+    }
+  }
+
+  function handleMoreClick() {
+    setShowMore(!showMore);
+  }
+
+  let sculpture = sculptureList[index];
   return (
     <div>
-      <Button onClick={onPlayMovie} children="Play Movie" />
-      <Button onClick={onUploadImage} children="Upload Image" />
+      <button onClick={handleNextClick}>Next</button>
+      <h1>
+        {sculpture.name} by {sculpture.artist}
+      </h1>
+      <p>
+        {index + 1} of {sculptureList.length}
+      </p>
+      <button onClick={handleMoreClick}>
+        {showMore ? "Hide" : "show More"} Details
+      </button>
+      <p>{showMore && sculpture.description}</p>
+      <img src={sculpture.url} alt={sculpture.alt} />
     </div>
   );
-}
-
-function Button({ onClick, children }) {
-  return <button onClick={onClick}>{children}</button>;
 }
