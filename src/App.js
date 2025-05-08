@@ -1,31 +1,22 @@
-function Button({ onClick, children }) {
-  return <button onClick={onClick}>{children}</button>;
-}
-
-function PlayButton({ moviename }) {
-  function handleClick() {
-    alert("Playing " + moviename);
-  }
-  return <Button onClick={handleClick}>play {moviename}</Button>;
-}
-
-function UploadButton() {
-  return (
-    <Button
-      onClick={() => {
-        alert("Uploading");
-      }}
-    >
-      Upload
-    </Button>
-  );
-}
-
-export default function Toolbar() {
+export default function App() {
   return (
     <>
-      <PlayButton moviename="ford vs ferrari" />
-      <UploadButton />
+      <Toolbar
+        onPlay={() => alert("playing Movie")}
+        onUpload={() => alert("Uploading file")}
+      />
     </>
   );
+}
+
+function Toolbar({ onPlay, onUpload }) {
+  return (
+    <>
+      <Button onSmash={onPlay}>Play Button</Button>
+      <Button onSmash={onUpload}>Upload Button</Button>
+    </>
+  );
+}
+function Button({ onSmash, children }) {
+  return <button onClick={onSmash}>{children}</button>;
 }
