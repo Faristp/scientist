@@ -1,20 +1,50 @@
-import List from "./List.js";
+import { useState } from "react";
 
 export default function App() {
-  const fruits = [
-    { id: 1, name: "Apple", calories: 95 },
-    { id: 2, name: "Banana", calories: 105 },
-    { id: 3, name: "Orange", calories: 62 },
+  const initialList = [
+    { id: 0, title: "friends", seen: true },
+    { id: 1, title: "breaking Bad", seen: false },
+    { id: 2, title: "ford vs ferrari", seen: true },
   ];
-  const vegetables = [
-    { id: 1, name: "Carrot", calories: 41 },
-    { id: 2, name: "Broccoli", calories: 55 },
-    { id: 3, name: "Spinach", calories: 23 },
-  ];
+
+  const [list, setList] = useState(initialList);
+
+  function handleToggle(showId, nextSeen) {
+    setList(
+      list.map((show) => {
+        if (showId === show.id) {
+          return { ...show, seen: nextSeen };
+        } else {
+          return show;
+        }
+      })
+    );
+  }
   return (
     <>
-      <List items={fruits} category="fruits" />
-      <List items={vegetables} category="vegetables" />
+      <h2>Netflix series To watch</h2>
+      <ListItems shows={list} onToggle={handleToggle} />
     </>
+  );
+}
+
+function ListItems({ shows, onToggle }) {
+  return (
+    <ul>
+      {shows.map((show) => (
+        <li key={show.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={show.seen}
+              onChange={(e) => {
+                onToggle(show.id, e.target.checked);
+              }}
+            />
+            {show.title}
+          </label>
+        </li>
+      ))}
+    </ul>
   );
 }
