@@ -1,50 +1,31 @@
-import { useState } from "react";
+function Button({ onClick, children }) {
+  return <button onClick={onClick}>{children}</button>;
+}
 
-export default function App() {
-  const initialList = [
-    { id: 0, title: "friends", seen: true },
-    { id: 1, title: "breaking Bad", seen: false },
-    { id: 2, title: "ford vs ferrari", seen: true },
-  ];
-
-  const [list, setList] = useState(initialList);
-
-  function handleToggle(showId, nextSeen) {
-    setList(
-      list.map((show) => {
-        if (showId === show.id) {
-          return { ...show, seen: nextSeen };
-        } else {
-          return show;
-        }
-      })
-    );
+function PlayButton({ moviename }) {
+  function handleClick() {
+    alert("Playing " + moviename);
   }
+  return <Button onClick={handleClick}>play {moviename}</Button>;
+}
+
+function UploadButton() {
   return (
-    <>
-      <h2>Netflix series To watch</h2>
-      <ListItems shows={list} onToggle={handleToggle} />
-    </>
+    <Button
+      onClick={() => {
+        alert("Uploading");
+      }}
+    >
+      Upload
+    </Button>
   );
 }
 
-function ListItems({ shows, onToggle }) {
+export default function Toolbar() {
   return (
-    <ul>
-      {shows.map((show) => (
-        <li key={show.id}>
-          <label>
-            <input
-              type="checkbox"
-              checked={show.seen}
-              onChange={(e) => {
-                onToggle(show.id, e.target.checked);
-              }}
-            />
-            {show.title}
-          </label>
-        </li>
-      ))}
-    </ul>
+    <>
+      <PlayButton moviename="ford vs ferrari" />
+      <UploadButton />
+    </>
   );
 }
